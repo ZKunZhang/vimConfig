@@ -12,6 +12,12 @@ set showcmd
 set wildmenu
 set hidden
 
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
 " Encoding / file format
 set encoding=utf-8
 set fileencoding=utf-8
@@ -29,6 +35,9 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>wq :wq<CR>
 nnoremap <leader>qa :qa<CR>
 nnoremap <leader>x :x<CR>
+nnoremap <leader>h :nohlsearch<CR>
+nnoremap <C-f> /
+vnoremap <C-f> /
 
 " File tree (netrw)
 let g:netrw_banner = 0
