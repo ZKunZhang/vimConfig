@@ -11,6 +11,7 @@ set laststatus=2
 set showcmd
 set wildmenu
 set hidden
+set mouse=a
 
 " Search
 set incsearch
@@ -110,18 +111,18 @@ function! s:OpenProjectPath(path) abort
     call extend(l:candidates, globpath(l:root, '**/' . l:needle . l:ext, 0, 1))
   endfor
 
-  let l:candidates = sort(filter(l:candidates, 'v:val !=# \"\" && v:val !~# s:project_ignore_regex'))
+  let l:candidates = sort(filter(l:candidates, 'v:val !=# "" && v:val !~# s:project_ignore_regex'))
   let l:candidates = uniq(l:candidates)
 
   if empty(l:candidates)
-    echohl WarningMsg | echom 'Path not found: ' . l:path | echohl None
+    echohl WarningMsg | echom '未找到路径: ' . l:path | echohl None
     return
   endif
 
   if len(l:candidates) == 1
     let l:target = l:candidates[0]
   else
-    let l:choices = ['Select target:']
+    let l:choices = ['请选择要打开的路径:']
     for l:i in range(len(l:candidates))
       call add(l:choices, printf('%d. %s', l:i + 1, l:candidates[l:i]))
     endfor
@@ -140,7 +141,7 @@ function! s:OpenProjectPath(path) abort
 endfunction
 
 function! s:PromptProjectPath() abort
-  let l:input = input('Open: ', '', 'file')
+  let l:input = input('打开路径: ', '', 'file')
   if l:input ==# ''
     return
   endif
